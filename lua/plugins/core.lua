@@ -1,4 +1,6 @@
 return {
+
+  -- supertab
   {
     "hrsh7th/nvim-cmp",
     ---@param opts cmp.ConfigSchema
@@ -6,10 +8,22 @@ return {
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        return col ~= 0
+          and vim.api
+              .nvim_buf_get_lines(0, line - 1, line, true)[1]
+              :sub(col, col)
+              :match("%s")
+            == nil
       end
 
       local cmp = require("cmp")
+
+      cmp.setup({
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+      })
 
       opts.mapping = vim.tbl_extend("force", opts.mapping, {
         ["<Tab>"] = cmp.mapping(function(fallback)
@@ -40,6 +54,8 @@ return {
       })
     end,
   },
+
+  -- transparency
   {
     "folke/tokyonight.nvim",
     opts = {
@@ -50,6 +66,8 @@ return {
       },
     },
   },
+
+  -- clangd offsetEncoding
   {
     "neovim/nvim-lspconfig",
     opts = {
@@ -60,6 +78,23 @@ return {
       },
     },
   },
+
+  -- lsp config
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        lua_ls = {
+          mason = false,
+        },
+        clangd = {
+          mason = false,
+        },
+      },
+    },
+  },
+
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -104,26 +139,38 @@ return {
       textobjects = {
         move = {
           enable = true,
-          goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-          goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-          goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-          goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+            ["]a"] = "@parameter.inner",
+          },
+          goto_next_end = {
+            ["]F"] = "@function.outer",
+            ["]C"] = "@class.outer",
+            ["]A"] = "@parameter.inner",
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+            ["[a"] = "@parameter.inner",
+          },
+          goto_previous_end = {
+            ["[F"] = "@function.outer",
+            ["[C"] = "@class.outer",
+            ["[A"] = "@parameter.inner",
+          },
         },
       },
     },
   },
+
+  -- mason
   {
     "williamboman/mason.nvim",
+    -- enabled = false,
     opts = {
       ui = {
         border = "rounded",
-      },
-      ensure_installed = {
-        "bash-language-server",
-        "codelldb",
-        "clangd",
-        "stylua",
-        "shfmt",
       },
     },
   },
