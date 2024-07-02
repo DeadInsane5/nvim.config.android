@@ -2,7 +2,7 @@ return {
   "nvim-lualine/lualine.nvim",
   config = function()
     local lualine = require("lualine")
-    lualine.setup {
+    lualine.setup({
 
       sections = {
         lualine_a = {
@@ -11,7 +11,7 @@ return {
             icons_enabled = true,
             separator = {
               left = "",
-              right = ""
+              right = "",
               -- right = ""
             },
             fmt = function()
@@ -19,20 +19,22 @@ return {
                 n = "(ᴗ_ ᴗ。) i sleep",
                 nt = "(ᴗ_ ᴗ。) i sleep",
                 i = "(•̀ - •́ ) real shitt",
-                R = "( •̯́ ₃ •̯̀)",
-                v = "(⊙ _ ⊙ ) DAMN",
-                V = "(⊙ _ ⊙ ) DAMN",
+                R = "(づ｡◕‿‿◕｡)づ",
+                v = "(╯°□°）╯︵┻━┻",
+                V = "(╯°□°）╯︵┻━┻",
                 no = "Σ(°△°ꪱꪱꪱ) LETSS GOO",
-                ["\22"] = "(⊙ _ ⊙ ) DAMN",
+                ["\22"] = "(╯°□°）╯︵┻━┻",
                 t = "(⌐■_■) hecker",
-                ['!'] = "Σ(°△°ꪱꪱꪱ) LETSS GOO",
+                ["!"] = "Σ(°△°ꪱꪱꪱ) LETSS GOO",
                 c = "Σ(°△°ꪱꪱꪱ) LETSS GOO",
-                s = "SUB"
+                s = "(⊙ _ ⊙ ) DAMN",
               }
-              return mode_map[vim.api.nvim_get_mode().mode] or vim.api.nvim_get_mode().mode
-            end },
+              return mode_map[vim.api.nvim_get_mode().mode]
+                or vim.api.nvim_get_mode().mode
+            end,
+          },
         },
-      }
-    }
-  end
+      },
+    })
+  end,
 }
